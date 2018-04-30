@@ -1,21 +1,39 @@
-# LESS Long Shadow
+# Long Shadow
 
-This [LESS](http://lesscss.org/) loop mixins generates trendy flat long shadow with any angle for inline text, font icons, block elements and SVGs. Looks best if wrapped by square `overflow: hidden;` container with _bold_ padding and rounded corners. Dont forget about good contrast color palette. Enjoy!
+This [LESS](http://lesscss.org/) and [SASS](http://sasscss.org/) loop mixins generates trendy flat long shadow with any angle for inline text, font icons, block elements and SVGs. Looks best if wrapped by square `overflow: hidden;` container with _bold_ padding and rounded corners. Dont forget about good contrast color palette. Enjoy!
 
-* Source: [GitHub](https://github.com/zensimilia/less-long-shadow)
+* Source: [GitHub](https://github.com/jonlov/long-shadow)
 * Demo: [CodePen](http://codepen.io/zensimilia/full/XbVgNx/)
-* Author: [Di M Dub](https://twitter.com/zensimilia)
 
 ## Installation
 
+#### SASS
+
+1. Make shure that you [installed](http://sasscss.org/) client or server-side SASS css-preprocessor
+2. [Clone git repo](https://github.com/jonlov/long-shadow/fork) or [Download](https://github.com/jonlov/long-shadow/archive/master.zip) and copy `long-shadow.scss` to your _e.g._ `/assets/scss` directory.
+3. Plug it to project by insert `@import "long-shadow.scss";` at beginning of main SCSS/CSS stylesheet file
+4. Assign mixins to elements rules.
+5. PROFIT
+
+#### LESS
 1. Make shure that you [installed](http://lesscss.org/) client or server-side LESS css-preprocessor
-2. [Clone git repo](https://github.com/zensimilia/less-long-shadow/fork) or [Download](https://github.com/zensimilia/less-long-shadow/archive/master.zip) and copy `long-shadow.less` to your _e.g._ `/assets/less` directory
+2. [Clone git repo](https://github.com/zensimilia/less-long-shadow/fork) or [Download](https://github.com/jonlov/long-shadow/archive/master.zip) and copy `long-shadow.less` to your _e.g._ `/assets/less` directory.
 3. Plug it to project by insert `@import "long-shadow.less";` at beginning of main LESS/CSS stylesheet file
 4. Assign mixins to elements rules.
 5. PROFIT
 
 ## Usage
 
+#### SASS
+```scss
+.someClass {
+    @include long-shadow-inline(@color, @angle, @size); // For text or icon
+    @include long-shadow-block(@color, @angle, @size, @prefix); // For container
+    @include long-shadow-svg(@color, @angle, @size, @prefix); // For SVG
+}
+```
+
+#### LESS
 ```less
 .someClass {
     #long-shadow.inline(@color, @angle, @size); // For text or icon
