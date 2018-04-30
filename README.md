@@ -66,7 +66,7 @@ Have a bug or a feature request? [Please open a new issue](https://github.com/ze
 ## Changelog
 
 __2.1.2__
-* Added Sass file and fade option [Jonlov](https://github.com/jonlov).
+* Added Sass support and fade option by [Jonlov](https://github.com/jonlov).
 
 __2.1.1__
 * Fix default color var. Thanx to [Sergey Pimenov](https://github.com/olton).
