@@ -95,47 +95,64 @@
   }
 }
 
-@mixin long-shadow-inline($color: #CCCCCC, $angle: 45, $size: 10, $flag: 1, $temp: "") {
+@mixin long-shadow-inline($color: #CCCCCC, $angle: 45, $size: 10, $fade: false, $flag: 1, $temp: "") {
   @if ($size > 0) {
     $angle360: $angle * (pi() / 180);
     $x: round($flag * cos($angle360));
     $y: round($flag * sin($angle360));
+    
+    @if ($fade == true) {
+      $opacity: $size / 800;
+      $color: rgba($color, $opacity);
+    }
     
     $shadow: #{$x}px #{$y}px 0px #{$color};
     $close: #{$shadow}, #{$temp};
     $alltogether: #{$close} 0px 0px 0px #{$color};
 
     @include loop($alltogether, $size - 1);
-    @include long-shadow-inline($color, $angle, $size - 1,$flag + 1, $close);
+    @include long-shadow-inline($color, $angle, $size - 1, $fade, $flag + 1, $close);
   }
 }
 
-@mixin long-shadow-block($color: #CCCCCC, $angle: 45, $size: 10, $prefix: 1, $flag: 1, $temp: "") {
+@mixin long-shadow-block($color: #CCCCCC, $angle: 45, $size: 10, $fade: false, $prefix: 1, $flag: 1, $temp: "") {
   @if ($size > 0) {
     $angle360: $angle * (pi() / 180);
     $x: round($flag * cos($angle360));
     $y: round($flag * sin($angle360));
+    
+    @if ($fade == true) {
+      $opacity: $size / 800;
+      $color: rgba($color, $opacity);
+    }
+    
     $shadow: #{$x}px #{$y}px 0px #{$color};
     $close: #{$shadow}, #{$temp};
     $alltogether: #{$close} 0px 0px 0px #{$color};
 
     @include loop($alltogether, $size - 1, 'block');
     @include loopPrefix($alltogether, $size - 1, $prefix);
-    @include long-shadow-block($color, $angle, $size - 1, $prefix, $flag + 1, $close);
+    @include long-shadow-block($color, $angle, $size - 1, $fade, $prefix, $flag + 1, $close);
   }
 }
 
-@mixin long-shadow-svg($color: #CCCCCC, $angle: 45, $size: 10, $prefix: 1, $flag: 1, $temp: "") {
+@mixin long-shadow-svg($color: #CCCCCC, $angle: 45, $size: 10, $fade: false, $prefix: 1, $flag: 1, $temp: "") {
   @if ($size > 0) {
     $angle360: $angle * (pi() / 180);
     $x: round($flag * cos($angle360));
     $y: round($flag * sin($angle360));
+    
+    @if ($fade == true) {
+      $opacity: $size / 800;
+      $color: rgba($color, $opacity);
+    }
+    
     $shadow: #{$x}px #{$y}px 0px #{$color};
     $close: "#{$shadow}) drop-shadow(#{$temp}";
     $alltogether: drop-shadow(#{$close} 0px 0px 0px #{$color});
 
     @include loop($alltogether, $size - 1, 'svg');
     @include loopPrefix($alltogether, $size - 1, $prefix, 'svg');
-    @include long-shadow-svg($color, $angle, $size - 1, $prefix, $flag + 1, $close);
+    @include long-shadow-svg($color, $angle, $size - 1, $fade, $prefix, $flag + 1, $close);
   }
 }
