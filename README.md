@@ -27,18 +27,18 @@ This [LESS](http://lesscss.org/) and [SASS](http://sasscss.org/) loop mixins gen
 #### SASS
 ```scss
 .someClass {
-    @include long-shadow-inline(@color, @angle, @size); // For text or icon
-    @include long-shadow-block(@color, @angle, @size, @prefix); // For container
-    @include long-shadow-svg(@color, @angle, @size, @prefix); // For SVG
+    @include long-shadow-inline($color, $angle, $size, $fade); // For text or icon
+    @include long-shadow-block($color, $angle, $size, $fade, $prefix); // For container
+    @include long-shadow-svg($color, $angle, $size, $fade, $prefix); // For SVG
 }
 ```
 
 #### LESS
 ```less
 .someClass {
-    #long-shadow.inline(@color, @angle, @size); // For text or icon
-    #long-shadow.block(@color, @angle, @size, @prefix); // For container
-    #long-shadow.svg(@color, @angle, @size, @prefix); // For SVG
+    #long-shadow.inline(@color, @angle, @size, @fade); // For text or icon
+    #long-shadow.block(@color, @angle, @size, @fade, @prefix); // For container
+    #long-shadow.svg(@color, @angle, @size, @fade, @prefix); // For SVG
 }
 ```
 
@@ -50,6 +50,9 @@ This [LESS](http://lesscss.org/) and [SASS](http://sasscss.org/) loop mixins gen
   * Default `45`.
 * __@size__ that shadow length would be:
   * Default `10`.
+* __@fade__ if the shadow should fade with opacity
+  * `0` : _false_ Default
+  * `1` : _true_ 
 * __@prefix__ param define the use of CSS _browser-prefixes_ for `box-shadow` or `filter` rule:
   * `0` : _false_
   * `1` : _true_ Default
@@ -60,13 +63,10 @@ This [LESS](http://lesscss.org/) and [SASS](http://sasscss.org/) loop mixins gen
 
 Have a bug or a feature request? [Please open a new issue](https://github.com/zensimilia/less-long-shadow/issues). Before opening any issue, please search for existing issues.
 
-## TODO
-
-- [ ] Correctly implement spread transparency.
-- [x] Add support for shadows on SVG.
-- [x] Add ability to specify an angle of shadow.
-
 ## Changelog
+
+__2.1.2__
+* Added Sass file and fade option [Jonlov](https://github.com/jonlov).
 
 __2.1.1__
 * Fix default color var. Thanx to [Sergey Pimenov](https://github.com/olton).
@@ -81,7 +81,7 @@ __2.0.0__
 * Remove _spread_ parameter. Now total flat shadow.
 
 __1.0.0__
-* Initial release.
+* Initial release. [Di M Dub](https://twitter.com/zensimilia)
 
 ## License
 
