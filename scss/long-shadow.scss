@@ -1,0 +1,141 @@
+/**
+* Sass Long Shadow v2.1.0
+* Long shadow generator mixins for inline, block and SVG elements.
+*
+* Source: https://github.com/jonlov/long-shadow
+* Author: Jonathan Lovera
+* License: MIT
+*
+* @include long-shadow-inline($color, $angle, $size);
+* @include long-shadow-block($color, $angle, $size, $prefix);
+* @include long-shadow-svg($color, $angle, $size, $prefix);
+*/
+@function fact($number) {
+  $value: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+  @return $value;
+}
+
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  }
+  @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+@function pi() {
+  @return 3.14159265359;
+}
+
+@function rad($angle) {
+  $unit: unit($angle);
+  $unitless: $angle / ($angle * 0 + 1);
+  // If the angle has 'deg' as unit, convert to radians.
+  @if $unit == deg {
+    $unitless: $unitless / 180 * pi();
+  }
+  @return $unitless;
+}
+
+@function sin($angle) {
+  $sin: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+  @return $sin;
+}
+
+@function cos($angle) {
+  $cos: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+  }
+  @return $cos;
+}
+
+@mixin loop($string, $index, $type: 'inline') {
+  @if ($index < 1) {
+    @if ($type == 'inline'){
+      text-shadow: $string;
+    }
+    @if ($type == 'block') {
+      box-shadow: $string;
+    }
+    @if ($type == 'svg') {
+      filter: $string;
+    }
+  }
+}
+
+@mixin loopPrefix($string, $index, $prefix, $type: 'box') {
+  @if ($index < 1) and ($prefix > 0) {
+    @if ($type == 'box') {
+      -webkit-box-shadow: $string;
+      -moz-box-shadow: $string;
+    }
+    @if ($type == 'svg'){
+      -webkit-filter: $string;
+    }
+  }
+}
+
+@mixin long-shadow-inline($color: #CCCCCC, $angle: 45, $size: 10, $flag: 1, $temp: "") {
+  @if ($size > 0) {
+    $angle360: $angle * (pi() / 180);
+    $x: round($flag * cos($angle360));
+    $y: round($flag * sin($angle360));
+    
+    $shadow: #{$x}px #{$y}px 0px #{$color};
+    $close: #{$shadow}, #{$temp};
+    $alltogether: #{$close} 0px 0px 0px #{$color};
+
+    @include loop($alltogether, $size - 1);
+    @include long-shadow-inline($color, $angle, $size - 1,$flag + 1, $close);
+  }
+}
+
+@mixin long-shadow-block($color: #CCCCCC, $angle: 45, $size: 10, $prefix: 1, $flag: 1, $temp: "") {
+  @if ($size > 0) {
+    $angle360: $angle * (pi() / 180);
+    $x: round($flag * cos($angle360));
+    $y: round($flag * sin($angle360));
+    $shadow: #{$x}px #{$y}px 0px #{$color};
+    $close: #{$shadow}, #{$temp};
+    $alltogether: #{$close} 0px 0px 0px #{$color};
+
+    @include loop($alltogether, $size - 1, 'block');
+    @include loopPrefix($alltogether, $size - 1, $prefix);
+    @include long-shadow-block($color, $angle, $size - 1, $prefix, $flag + 1, $close);
+  }
+}
+
+@mixin long-shadow-svg($color: #CCCCCC, $angle: 45, $size: 10, $prefix: 1, $flag: 1, $temp: "") {
+  @if ($size > 0) {
+    $angle360: $angle * (pi() / 180);
+    $x: round($flag * cos($angle360));
+    $y: round($flag * sin($angle360));
+    $shadow: #{$x}px #{$y}px 0px #{$color};
+    $close: "#{$shadow}) drop-shadow(#{$temp}";
+    $alltogether: drop-shadow(#{$close} 0px 0px 0px #{$color});
+
+    @include loop($alltogether, $size - 1, 'svg');
+    @include loopPrefix($alltogether, $size - 1, $prefix, 'svg');
+    @include long-shadow-svg($color, $angle, $size - 1, $prefix, $flag + 1, $close);
+  }
+}
