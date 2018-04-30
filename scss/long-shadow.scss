@@ -111,7 +111,7 @@
     $alltogether: #{$close} 0px 0px 0px #{$color};
 
     @include loop($alltogether, $size - 1);
-    @include long-shadow-inline($color, $angle, $size - 1, $blur, $fade, $size * 2, $flag + 1, $close);
+    @include long-shadow-inline($color, $angle, $size - 1, $blur, $fade, $size * 1.5, $flag + 1, $close);
   }
 }
 
@@ -132,7 +132,7 @@
 
     @include loop($alltogether, $size - 1, 'block');
     @include loopPrefix($alltogether, $size - 1, $prefix);
-    @include long-shadow-block($color, $angle, $size - 1, $blur, $fade, $prefix, $size * 2, $flag + 1, $close);
+    @include long-shadow-block($color, $angle, $size - 1, $blur, $fade, $prefix, $size * 1.5, $flag + 1, $close);
   }
 }
 
@@ -153,6 +153,6 @@
 
     @include loop($alltogether, $size - 1, 'svg');
     @include loopPrefix($alltogether, $size - 1, $prefix, 'svg');
-    @include long-shadow-svg($color, $angle, $size - 1, $blur, $fade, $prefix, $flag + 1, $size * 2, $close);
+    @include long-shadow-svg($color, $angle, $size - 1, $blur, $fade, $prefix, $flag + 1, $size * 1.5, $close);
   }
 }
