@@ -12,7 +12,7 @@
 */
 
 #long-shadow {
-    .inline(@defaultColor: #CCCCCC, @angle: 45, @size: 10, @fade: 0, @flag: 1, @temp: "") when (@size > 0) {
+    .inline(@defaultColor: #CCCCCC, @angle: 45, @size: 10, @fade: 0, @totalSize: 1, @flag: 1, @temp: "") when (@size > 0) {
         @angle360: @angle * (pi() / 180);
         @x: round(@flag * cos(@angle360));
         @y: round(@flag * sin(@angle360));
@@ -23,7 +23,7 @@
           @red: red(@defaultColor);
           @green: green(@defaultColor);
           @blue: blue(@defaultColor);
-          @opacity: @size / 100;
+          @opacity: @size / @totalSize;
           @color: rgba(@red, @green, @blue, @opacity);
         }
         
@@ -36,10 +36,10 @@
         }
 
         .loop(@alltogether, @size - 1);
-        .inline(@color, @angle, @size - 1, @fade, @flag + 1, @close);
+        .inline(@color, @angle, @size - 1, @fade, @size * 2, @flag + 1, @close);
     }
 
-    .block(@defaultColor: #CCCCCC, @angle: 45, @size: 10, @fade: 0, @prefix: 1, @flag: 1, @temp: "") when (@size > 0) {
+    .block(@defaultColor: #CCCCCC, @angle: 45, @size: 10, @fade: 0, @prefix: 1, @totalSize: 1, @flag: 1, @temp: "") when (@size > 0) {
         @angle360: @angle * (pi() / 180);
         @x: round(@flag * cos(@angle360));
         @y: round(@flag * sin(@angle360));
@@ -50,7 +50,7 @@
           @red: red(@defaultColor);
           @green: green(@defaultColor);
           @blue: blue(@defaultColor);
-          @opacity: @size / 100;
+          @opacity: @size / @totalSize;
           @color: rgba(@red, @green, @blue, @opacity);
         }
         
@@ -69,10 +69,10 @@
 
         .loop(@alltogether, @size - 1);
         .loopPrefix(@alltogether, @size - 1);
-        .block(@color, @angle, @size - 1, @fade, @prefix, @flag + 1, @close);
+        .block(@color, @angle, @size - 1, @fade, @prefix, @size * 2, @flag + 1, @close);
     }
 
-    .svg(@defaultColor: #CCCCCC, @angle: 45, @size: 10, @fade: 0, @prefix: 1, @flag: 1, @temp: "") when (@size > 0) {
+    .svg(@defaultColor: #CCCCCC, @angle: 45, @size: 10, @fade: 0, @prefix: 1, @totalSize: 1, @flag: 1, @temp: "") when (@size > 0) {
         @angle360: @angle * (pi() / 180);
         @x: round(@flag * cos(@angle360));
         @y: round(@flag * sin(@angle360));
@@ -83,7 +83,7 @@
           @red: red(@defaultColor);
           @green: green(@defaultColor);
           @blue: blue(@defaultColor);
-          @opacity: @size / 100;
+          @opacity: @size / @totalSize;
           @color: rgba(@red, @green, @blue, @opacity);
         }
         
@@ -101,6 +101,6 @@
 
         .loop(@alltogether, @size - 1);
         .loopPrefix(@alltogether, @size - 1);
-        .svg(@color, @angle, @size - 1, @fade, @prefix, @flag + 1, @close);
+        .svg(@color, @angle, @size - 1, @fade, @prefix, @size * 2, @flag + 1, @close);
     }
 }
