@@ -95,13 +95,13 @@
   }
 }
 
-@mixin long-shadow-inline($color: #CCCCCC, $angle: 45, $size: 10, $fade: false, $flag: 1, $temp: "") {
+@mixin long-shadow-inline($color: #CCCCCC, $angle: 45, $size: 10, $fade: 0, $flag: 1, $temp: "") {
   @if ($size > 0) {
     $angle360: $angle * (pi() / 180);
     $x: round($flag * cos($angle360));
     $y: round($flag * sin($angle360));
     
-    @if ($fade == true) {
+    @if ($fade > 0) {
       $opacity: $size / 800;
       $color: rgba($color, $opacity);
     }
@@ -115,13 +115,13 @@
   }
 }
 
-@mixin long-shadow-block($color: #CCCCCC, $angle: 45, $size: 10, $fade: false, $prefix: 1, $flag: 1, $temp: "") {
+@mixin long-shadow-block($color: #CCCCCC, $angle: 45, $size: 10, $fade: 0, $prefix: 1, $flag: 1, $temp: "") {
   @if ($size > 0) {
     $angle360: $angle * (pi() / 180);
     $x: round($flag * cos($angle360));
     $y: round($flag * sin($angle360));
     
-    @if ($fade == true) {
+    @if ($fade > 0) {
       $opacity: $size / 800;
       $color: rgba($color, $opacity);
     }
@@ -136,13 +136,13 @@
   }
 }
 
-@mixin long-shadow-svg($color: #CCCCCC, $angle: 45, $size: 10, $fade: false, $prefix: 1, $flag: 1, $temp: "") {
+@mixin long-shadow-svg($color: #CCCCCC, $angle: 45, $size: 10, $fade: 0, $prefix: 1, $flag: 1, $temp: "") {
   @if ($size > 0) {
     $angle360: $angle * (pi() / 180);
     $x: round($flag * cos($angle360));
     $y: round($flag * sin($angle360));
     
-    @if ($fade == true) {
+    @if ($fade > 0) {
       $opacity: $size / 800;
       $color: rgba($color, $opacity);
     }
